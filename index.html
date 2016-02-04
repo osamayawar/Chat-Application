@@ -6,30 +6,46 @@
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
       form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      form input { border: 0; padding: 10px; width: 87%;  }
+      form button { background: rgb(130, 224, 255); border: none; padding: 10px; width: 5.1em;}
+      #name {float: right; width: 9%;}
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
+      #name::-webkit-input-placeholder { color:#000; }
+      .name {font-size: bold;}
+      .username {float: left; padding-right: 5px;}
     </style>
   </head>
   <body>
-    <ul id="messages"></ul>
+  <!--  <div><b class="username"></b></div>
+   <div class="user-message"></div> -->
+   <ul id="messages"></ul>
     <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
+      <input id="m" name="message" autocomplete="off" placeholder="Type your message here"/>
+      <input id="name" name="name" placeholder="Enter your name" required />
+      <button>Send</button>
     </form>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
         $('form').submit(function(){
-            socket.emit('chat message', $('#m').val());
+            var data = {
+                "name":$('#name').val() + ": ",
+                "message":$('#m').val()
+            }
+            socket.emit('chat message', data);
             $('#m').val('');
             return false;
         });
-        socket.on('chat message', function(msg){
-            console.log(msg);
-            $('#messages').append($('<li>').text(msg));
+        socket.on('chat message', function(data){
+            console.log(data.name);
+            var message = data.name + data.message;
+            $('#messages').append($('<li>').text(message));
+            
+            // $('.username').text(data.name);
+            // $('.user-message').text(data.message);
         });
     </script>
   </body>
