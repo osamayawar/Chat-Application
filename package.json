@@ -1,0 +1,29 @@
+{
+  "name": "socketio",
+  "version": "1.0.0",
+  "description": "Chat Application using Socket.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osamayawar/Chat-Application.git"
+  },
+  "keywords": [
+    "Chat",
+    "Socketio",
+    "node",
+    "express"
+  ],
+  "author": "Osama Yawar Khawaja",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/osamayawar/Chat-Application/issues"
+  },
+  "homepage": "https://github.com/osamayawar/Chat-Application#readme",
+  "dependencies": {
+    "express": "^4.10.2",
+    "socket.io": "^1.4.5"
+  }
+}
